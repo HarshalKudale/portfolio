@@ -1,0 +1,24 @@
+{
+    "professional": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/HarshalKudale",
+            "icon": "github"
+        },
+        {
+            "name": "LinkedIn",
+            "url": "https://www.linkedin.com/in/harshalkudale/",
+            "icon": "linkedin"
+        }
+    ],
+    "personal": [
+        {
+            "name": "Store",
+            "url": "https://store.harshalkudale.com"
+        },
+        {
+            "name": "Blog",
+            "url": "https://blog.harshalkudale.com"
+        }
+    ]
+}

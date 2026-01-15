@@ -1,0 +1,51 @@
+{
+    "categories": [
+        {
+            "name": "Languages",
+            "skills": [
+                "Java",
+                "JavaScript (ES6+)",
+                "SQL",
+                "TypeScript"
+            ]
+        },
+        {
+            "name": "Backend & Systems",
+            "skills": [
+                "Spring Boot",
+                "Microservices",
+                "REST APIs",
+                "JMX",
+                "Hibernate"
+            ]
+        },
+        {
+            "name": "Frontend",
+            "skills": [
+                "React JS",
+                "Next.js",
+                "Module Federation",
+                "Context API"
+            ]
+        },
+        {
+            "name": "Messaging & Databases",
+            "skills": [
+                "RabbitMQ",
+                "MySQL",
+                "MongoDB"
+            ]
+        },
+        {
+            "name": "DevOps & Tools",
+            "skills": [
+                "Docker",
+                "Jenkins",
+                "Kibana",
+                "Maven",
+                "Git",
+                "Linux/Unix"
+            ]
+        }
+    ]
+}
