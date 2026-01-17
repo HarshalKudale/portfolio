@@ -7,6 +7,7 @@ import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
+import Blog from "@/components/Blog";
 import Education from "@/components/Education";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -54,6 +55,7 @@ export default function Home() {
           <NavItem id="skills" label="Skills" />
           <NavItem id="experience" label="Experience" />
           <NavItem id="projects" label="Projects" />
+          <NavItem id="blog" label="Blog" />
           <NavItem id="contact" label="Contact" />
         </nav>
 
@@ -89,6 +91,7 @@ export default function Home() {
           <Skills />
           <Experience />
           <Projects />
+          <Blog />
           <Education />
           <Contact />
           <Footer />
