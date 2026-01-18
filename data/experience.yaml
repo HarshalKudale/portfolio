@@ -1,0 +1,12 @@
+- id: "mediaocean"
+  company: "Mediaocean Asia Pvt. Ltd."
+  role: "Software Engineer - Full Stack"
+  location: "Pune, IN"
+  period: "July 2022 - Present"
+  highlights:
+    - "Engineered an asynchronous JMX-based workflow to migrate 150,000+ financial invoice records from SQL to MongoDB; utilized RabbitMQ with Dead Letter Queues (DLQ) to ensure 100% data consistency and transactional integrity."
+    - "Designed and implemented multiple high-performance REST APIs across microservices, utilizing Feign clients with automated security header injection for secure inter-service communication."
+    - "Led Root Cause Analysis (RCA) for critical production issues, implementing fixes that improved system stability and uptime for adtech financial operations."
+    - "Architected a Next.js host module using Module Federation to integrate disparate React and Knockout.js modules, improving frontend scalability and deployment speed."
+    - "Upgraded enterprise microservices to Java 17 and automated Jenkins pipelines for auto-branching and dependency locking, reducing manual deployment efforts by 40%."
+    - "Led the technical design of a cross-service reconciliation engine to handle invoice rejection and state reversion across multiple distributed databases."

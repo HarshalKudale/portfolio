@@ -1,0 +1,20 @@
+baseURL = 'https://harshalkudale.com/'
+languageCode = 'en-us'
+title = 'Harshal Kudale'
+
+# Parameters
+[params]
+  description = "Software Engineer III with expertise in Java, Spring Boot, and Microservices"
+  author = "Harshal Kudale"
+  
+  # Blog URL for fetching posts
+  blogUrl = "https://blog.harshalkudale.com"
+  blogApiUrl = "https://blog.harshalkudale.com/index.json"
+
+# Build settings
+[build]
+  writeStats = false
+
+# Minification
+[minify]
+  minifyOutput = true

@@ -1,0 +1,8 @@
+- id: "sppu"
+  degree: "B.E. Computer Science"
+  institution: "Pune University (SPPU)"
+  location: "Pune, IN"
+  period: "2018 - 2022"
+  gpa: "9.33 / 10.0"
+  highlights:
+    - "Led multiple technical activities and events during university tenure"

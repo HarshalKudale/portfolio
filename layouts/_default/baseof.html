@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default " en" }}">
+
+<head>
+    {{- partial "head.html" . -}}
+</head>
+
+<body>
+    {{- partial "header.html" . -}}
+
+    <main class="container">
+        {{- block "main" . }}{{- end }}
+    </main>
+
+    {{- partial "footer.html" . -}}
+
+    {{/* Main Script */}}
+    {{ $main := resources.Get "js/main.js" | minify }}
+    <script src="{{ $main.RelPermalink }}"></script>
+
+    {{/* Blog Script */}}
+    {{ $blog := resources.Get "js/blog.js" | minify }}
+    <script src="{{ $blog.RelPermalink }}"></script>
+
+    {{/* GitHub Stats Script */}}
+    {{ $githubStats := resources.Get "js/github-stats.js" | minify }}
+    <script src="{{ $githubStats.RelPermalink }}"></script>
+</body>
+
+</html>

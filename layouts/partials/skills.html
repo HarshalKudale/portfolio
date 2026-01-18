@@ -1,0 +1,10 @@
+{{ $skills := .Site.Data.skills }}
+
+<section id="skills" class="section">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-inline">
+        {{ range $skills.skills }}
+        <span class="skill-pill">{{ . }}</span>
+        {{ end }}
+    </div>
+</section>
