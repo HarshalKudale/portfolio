@@ -368,6 +368,25 @@ main {
     line-height: 1.5;
 }
 
+.home-project-links {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-shrink: 0;
+}
+
+.home-project-link {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    transition: color var(--transition-fast);
+}
+
+.home-project-link:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
 /* --------------------------------
    Homepage Work Experience
    -------------------------------- */

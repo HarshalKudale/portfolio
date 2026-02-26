@@ -13,12 +13,20 @@
     </div>
     <div class="home-post-list">
         {{ range $featured }}
-        <a href="{{ .deployUrl | default .githubUrl }}" target="_blank" rel="noopener noreferrer" class="home-post-item">
+        <div class="home-post-item">
             <div class="home-post-info">
                 <h3 class="home-post-title">{{ .name }}</h3>
+                <div class="home-project-links">
+                    {{ with .githubUrl }}
+                    <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="home-project-link">Source Code →</a>
+                    {{ end }}
+                    {{ with .deployUrl }}
+                    <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="home-project-link">Live →</a>
+                    {{ end }}
+                </div>
             </div>
             <p class="home-post-desc">{{ .description }}</p>
-        </a>
+        </div>
         {{ end }}
     </div>
 </section>
