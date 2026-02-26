@@ -1,0 +1,21 @@
+{{- $posts := where .Site.RegularPages "Section" "posts" -}}
+{{- $recentPosts := first 5 $posts -}}
+{
+  "title": "{{ .Site.Title }}",
+  "description": "{{ .Site.Params.description }}",
+  "url": "{{ .Site.BaseURL }}",
+  "updated": "{{ now.Format "2006-01-02T15:04:05Z07:00" }}",
+  "posts": [
+    {{- range $index, $post := $recentPosts }}
+    {{- if $index }},{{ end }}
+    {
+      "title": "{{ $post.Title }}",
+      "url": "{{ $post.Permalink }}",
+      "date": "{{ $post.Date.Format "2006-01-02" }}",
+      "description": "{{ $post.Params.description | default ($post.Summary | plainify | truncate 150) }}",
+      "readingTime": {{ $post.ReadingTime }},
+      "tags": [{{ range $i, $tag := $post.Params.tags }}{{ if $i }}, {{ end }}"{{ $tag }}"{{ end }}]
+    }
+    {{- end }}
+  ]
+}

@@ -2,25 +2,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>{{ .Site.Title }} - {{ .Site.Params.description }}</title>
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 
 {{/* Meta Description */}}
-<meta name="description" content="{{ .Site.Params.description }}">
+{{ $description := .Params.description | default .Site.Params.description | default .Summary }}
+<meta name="description" content="{{ $description | plainify | truncate 160 }}">
 
 {{/* Author */}}
 <meta name="author" content="{{ .Site.Params.author }}">
 
 {{/* Open Graph */}}
-<meta property="og:title" content="{{ .Site.Title }}">
-<meta property="og:description" content="{{ .Site.Params.description }}">
-<meta property="og:type" content="website">
+<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
+<meta property="og:description" content="{{ $description | plainify | truncate 160 }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
-<meta property="og:image" content="{{ " profile.jpg" | absURL }}">
+{{ with .Params.image }}
+<meta property="og:image" content="{{ . | absURL }}">
+{{ else }}
+<meta property="og:image" content="{{ "profile.jpg" | absURL }}">
+{{ end }}
 
 {{/* Twitter Card */}}
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ .Site.Title }}">
-<meta name="twitter:description" content="{{ .Site.Params.description }}">
+<meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
+<meta name="twitter:description" content="{{ $description | plainify | truncate 160 }}">
 
 {{/* Canonical URL */}}
 <link rel="canonical" href="{{ .Permalink }}">
@@ -31,6 +36,15 @@
 {{/* CSS */}}
 {{ $css := resources.Get "css/main.css" | minify }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+
+{{/* Prevent dark mode flash — blocking script sets theme before first paint */}}
+<script>
+    (function() {
+        var t = localStorage.getItem('theme');
+        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+    })();
+</script>
 
 {{/* Fonts */}}
 <link rel="preconnect" href="https://fonts.googleapis.com">

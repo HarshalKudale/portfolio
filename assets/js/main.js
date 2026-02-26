@@ -20,6 +20,7 @@
     function applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         updateToggleIcon(theme);
+        updateGiscusTheme(theme);
     }
 
     // Update toggle button icon
@@ -29,6 +30,18 @@
             toggle.innerHTML = theme === DARK ? '☀️' : '🌙';
             toggle.setAttribute('aria-label', `Switch to ${theme === DARK ? 'light' : 'dark'} mode`);
         });
+    }
+
+    // Update Giscus theme if present
+    function updateGiscusTheme(theme) {
+        const giscusFrame = document.querySelector('iframe.giscus-frame');
+        if (giscusFrame) {
+            const giscusTheme = theme === DARK ? 'dark' : 'light';
+            giscusFrame.contentWindow.postMessage(
+                { giscus: { setConfig: { theme: giscusTheme } } },
+                'https://giscus.app'
+            );
+        }
     }
 
     // Toggle theme
@@ -56,7 +69,7 @@
     document.documentElement.setAttribute('data-theme', theme);
 })();
 
-// Smooth scroll for navigation
+// Smooth scroll for navigation (only for anchor links)
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {

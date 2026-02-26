@@ -1,11 +1,23 @@
-<section id="blog" class="section">
-    <h2 class="section-title">Recent Posts</h2>
-    <div id="blog-posts" class="post-list">
-        <div class="blog-loading">
-            <p>Loading posts...</p>
-        </div>
+{{ $posts := where .Site.RegularPages "Section" "posts" }}
+
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Latest posts</h2>
+        {{ if gt (len $posts) 3 }}
+        <a href="/posts/" class="section-link">See all posts</a>
+        {{ end }}
     </div>
-    <p style="margin-top: var(--spacing-lg);">
-        <a href="https://blog.harshalkudale.com" target="_blank" rel="noopener noreferrer">View all posts →</a>
-    </p>
+    <div class="home-post-list">
+        {{ range first 3 $posts }}
+        <a href="{{ .RelPermalink }}" class="home-post-item">
+            <div class="home-post-info">
+                <h3 class="home-post-title">{{ .Title }}</h3>
+                <span class="home-post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+            </div>
+            {{ with .Params.description }}
+            <p class="home-post-desc">{{ . }}</p>
+            {{ end }}
+        </a>
+        {{ end }}
+    </div>
 </section>

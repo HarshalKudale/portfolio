@@ -14,17 +14,112 @@
 
     {{- partial "footer.html" . -}}
 
-    {{/* Main Script */}}
+    {{/* Theme Script */}}
     {{ $main := resources.Get "js/main.js" | minify }}
     <script src="{{ $main.RelPermalink }}"></script>
-
-    {{/* Blog Script */}}
-    {{ $blog := resources.Get "js/blog.js" | minify }}
-    <script src="{{ $blog.RelPermalink }}"></script>
 
     {{/* GitHub Stats Script */}}
     {{ $githubStats := resources.Get "js/github-stats.js" | minify }}
     <script src="{{ $githubStats.RelPermalink }}"></script>
+
+    {{/* Anchor Link Copy to Clipboard */}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.anchor-link').forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const url = window.location.origin + window.location.pathname + this.getAttribute('href');
+                    navigator.clipboard.writeText(url).then(function () {
+                        const originalColor = link.style.color;
+                        link.style.color = 'var(--color-accent)';
+                        link.style.opacity = '1';
+                        setTimeout(function () {
+                            link.style.color = originalColor;
+                            link.style.opacity = '';
+                        }, 1000);
+                    }).catch(function (err) {
+                        window.location.hash = link.getAttribute('href');
+                    });
+                });
+            });
+        });
+    </script>
+
+    {{/* Code Block Copy to Clipboard */}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.code-copy-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    const wrapper = btn.closest('.code-block-wrapper');
+                    const codeElement = wrapper.querySelector('code');
+                    const text = codeElement ? codeElement.textContent : '';
+
+                    navigator.clipboard.writeText(text).then(function () {
+                        const copyIcon = btn.querySelector('.copy-icon');
+                        const checkIcon = btn.querySelector('.check-icon');
+
+                        btn.classList.add('copied');
+                        if (copyIcon) copyIcon.style.display = 'none';
+                        if (checkIcon) checkIcon.style.display = 'block';
+
+                        setTimeout(function () {
+                            btn.classList.remove('copied');
+                            if (copyIcon) copyIcon.style.display = 'block';
+                            if (checkIcon) checkIcon.style.display = 'none';
+                        }, 2000);
+                    }).catch(function (err) {
+                        console.error('Failed to copy:', err);
+                    });
+                });
+            });
+        });
+    </script>
+
+    {{/* GoatCounter Analytics */}}
+    {{ with .Site.Params.goatcounter }}
+    <script data-goatcounter="https://{{ . }}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+    {{/* GoatCounter View Counts */}}
+    <script>
+        (function () {
+            const gcCode = '{{ . }}';
+            const viewCountElements = document.querySelectorAll('.view-count[data-goatcounter-path]');
+
+            if (viewCountElements.length === 0) return;
+
+            const paths = Array.from(viewCountElements).map(el => el.dataset.goatcounterPath);
+
+            fetch(`https://${gcCode}.goatcounter.com/counter/${encodeURIComponent(JSON.stringify(paths))}.json`)
+                .then(res => res.json())
+                .then(data => {
+                    viewCountElements.forEach(el => {
+                        const path = el.dataset.goatcounterPath;
+                        const count = data.count_unique || data.count || 0;
+                        el.textContent = `${count} views`;
+                    });
+                })
+                .catch(() => {
+                    viewCountElements.forEach(el => {
+                        const path = el.dataset.goatcounterPath;
+                        fetch(`https://${gcCode}.goatcounter.com/counter/${encodeURIComponent(path)}.json`)
+                            .then(res => res.json())
+                            .then(data => {
+                                el.textContent = `${data.count_unique || data.count || 0} views`;
+                            })
+                            .catch(() => {
+                                el.textContent = '0 views';
+                            });
+                    });
+                });
+        })();
+    </script>
+    {{ else }}
+    <script>
+        document.querySelectorAll('.view-count').forEach(el => {
+            el.textContent = '0 views';
+        });
+    </script>
+    {{ end }}
 </body>
 
 </html>

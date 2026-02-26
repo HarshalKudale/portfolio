@@ -2,14 +2,65 @@ baseURL = 'https://harshalkudale.com/'
 languageCode = 'en-us'
 title = 'Harshal Kudale'
 
+# Taxonomies
+[taxonomies]
+  tag = 'tags'
+
 # Parameters
 [params]
   description = "Software Engineer III with expertise in Java, Spring Boot, and Microservices"
   author = "Harshal Kudale"
   
-  # Blog URL for fetching posts
-  blogUrl = "https://blog.harshalkudale.com"
-  blogApiUrl = "https://blog.harshalkudale.com/index.json"
+  # GoatCounter Analytics
+  goatcounter = "hkudale"
+  
+  # Giscus Comments Configuration
+  [params.giscus]
+    repo = "HarshalKudale/personal-blog-comments"
+    repoId = "R_kgDOQ7hyTw"
+    category = "General"
+    categoryId = "DIC_kwDOQ7hyT84C1EJv"
+    mapping = "title"
+    strict = "1"
+    reactionsEnabled = "1"
+    emitMetadata = "0"
+    inputPosition = "top"
+    lang = "en"
+
+# Syntax Highlighting with Chroma
+[markup]
+  [markup.highlight]
+    style = 'dracula'
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = false
+    codeFences = true
+    guessSyntax = true
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.goldmark.parser]
+    autoHeadingID = true
+    autoHeadingIDType = "github"
+  [markup.goldmark.parser.attribute]
+    block = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false
+
+# Pagination
+[pagination]
+  pagerSize = 10
+
+# Output Formats
+[outputFormats]
+  [outputFormats.JSON]
+    mediaType = "application/json"
+    baseName = "index"
+    isPlainText = true
+
+[outputs]
+  home = ["HTML", "JSON"]
 
 # Build settings
 [build]

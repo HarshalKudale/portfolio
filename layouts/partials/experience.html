@@ -1,23 +1,19 @@
 {{ $experience := .Site.Data.experience }}
 
 <section id="experience" class="section">
-    <h2 class="section-title">Experience</h2>
-    {{ range $experience }}
-    <div class="experience-item">
-        <div class="experience-header">
-            <h3 class="experience-role">{{ .role }}</h3>
-            <p class="experience-company">{{ .company }}</p>
-            <div class="experience-meta">
-                <span>{{ .location }}</span>
-                <span>•</span>
-                <span>{{ .period }}</span>
-            </div>
-        </div>
-        <ul class="experience-highlights">
-            {{ range .highlights }}
-            <li>{{ . }}</li>
+    <div class="section-header">
+        <h2 class="section-title">Work Experience</h2>
+    </div>
+    {{ range first 2 $experience }}
+    <div class="home-work-item">
+        <div class="home-work-period">{{ .period }}</div>
+        <div class="home-work-details">
+            <h3 class="home-work-company">{{ .company }}</h3>
+            <p class="home-work-role">{{ .role }}</p>
+            {{ with (index .highlights 0) }}
+            <p class="home-work-desc">{{ . }}</p>
             {{ end }}
-        </ul>
+        </div>
     </div>
     {{ end }}
 </section>

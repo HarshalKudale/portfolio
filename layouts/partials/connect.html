@@ -1,0 +1,20 @@
+{{ $profile := .Site.Data.profile }}
+{{ $links := .Site.Data.links }}
+
+<section class="section">
+    <div class="section-header">
+        <h2 class="section-title">Let's Connect</h2>
+    </div>
+    <p class="connect-text">If you want to get in touch with me about something or just to say hi, reach out on social media or send me an email.</p>
+    <div class="connect-links">
+        {{ range $links.professional }}
+        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name | lower }}</a>
+        <span class="separator">/</span>
+        {{ end }}
+        {{ range $links.personal }}
+        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name | lower }}</a>
+        <span class="separator">/</span>
+        {{ end }}
+        <a href="mailto:{{ $profile.email }}">{{ $profile.email }}</a>
+    </div>
+</section>

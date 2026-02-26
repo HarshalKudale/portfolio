@@ -1,0 +1,125 @@
+{{ define "main" }}
+<div data-pagefind-ignore="all">
+    <h1>{{ .Title | default "All Posts" }}</h1>
+
+    {{/* Inline Search */}}
+    <div class="posts-search">
+        <input type="text" id="post-search" class="search-input" placeholder="Search posts..." autocomplete="off">
+    </div>
+
+    {{/* Tags as client-side filters */}}
+    {{ $allTags := .Site.Taxonomies.tags }}
+    {{ if $allTags }}
+    <div class="posts-tags-filter">
+        <button class="tag tag--active" data-tag="all">All</button>
+        {{ range $allTags.ByCount }}
+        <button class="tag" data-tag="{{ .Page.Title | lower }}">{{ .Page.Title }} ({{ .Count }})</button>
+        {{ end }}
+    </div>
+    {{ end }}
+
+    {{/* Post List */}}
+    <section class="section">
+        <div class="post-list" id="post-list">
+            {{ range .Pages }}
+            <article class="post-card" data-tags="{{ with .Params.tags }}{{ delimit . "," | lower }}{{ end }}">
+                <h3 class="post-card-title">
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </h3>
+                <div class="post-card-meta">
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+                    <span class="separator">•</span>
+                    <span>{{ .ReadingTime }} min read</span>
+                </div>
+                {{ with .Params.tags }}
+                <div class="post-card-tags">
+                    {{ range . }}
+                    <span class="tag">{{ . }}</span>
+                    {{ end }}
+                </div>
+                {{ end }}
+                {{ with .Params.description }}
+                <p class="post-card-excerpt">{{ . }}</p>
+                {{ else }}
+                {{ with .Summary }}
+                <p class="post-card-excerpt">{{ . | plainify | truncate 150 }}</p>
+                {{ end }}
+                {{ end }}
+            </article>
+            {{ end }}
+        </div>
+    </section>
+
+    <p id="no-results" style="display:none; color: var(--color-text-muted); text-align: center; padding: var(--spacing-xl) 0;">
+        No posts match your search.
+    </p>
+
+    {{/* Client-side search + tag filtering */}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('post-search');
+            const postList = document.getElementById('post-list');
+            const noResults = document.getElementById('no-results');
+            if (!searchInput || !postList) return;
+
+            const posts = Array.from(postList.querySelectorAll('.post-card'));
+            const tagButtons = document.querySelectorAll('.posts-tags-filter .tag');
+            let activeTag = 'all';
+
+            function filterPosts() {
+                const query = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                posts.forEach(function (post) {
+                    const title = (post.querySelector('.post-card-title') || {}).textContent || '';
+                    const excerpt = (post.querySelector('.post-card-excerpt') || {}).textContent || '';
+                    const tagsText = (post.querySelector('.post-card-tags') || {}).textContent || '';
+                    const postTags = (post.dataset.tags || '').split(',');
+                    const text = (title + ' ' + excerpt + ' ' + tagsText).toLowerCase();
+
+                    const matchesSearch = !query || text.includes(query);
+                    const matchesTag = activeTag === 'all' || postTags.includes(activeTag);
+
+                    if (matchesSearch && matchesTag) {
+                        post.style.display = '';
+                        visibleCount++;
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+
+                if (noResults) {
+                    noResults.style.display = visibleCount === 0 ? '' : 'none';
+                }
+            }
+
+            searchInput.addEventListener('input', filterPosts);
+
+            tagButtons.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    tagButtons.forEach(function (b) { b.classList.remove('tag--active'); });
+                    btn.classList.add('tag--active');
+                    activeTag = btn.dataset.tag;
+                    filterPosts();
+                });
+            });
+        });
+    </script>
+
+    {{/* Pagination */}}
+    {{ if .Paginator }}
+    {{ $paginator := .Paginator }}
+    {{ if gt $paginator.TotalPages 1 }}
+    <nav class="pagination">
+        {{ if $paginator.HasPrev }}
+        <a href="{{ $paginator.Prev.URL }}">← Newer</a>
+        {{ end }}
+        <span style="color: var(--color-text-muted);">Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
+        {{ if $paginator.HasNext }}
+        <a href="{{ $paginator.Next.URL }}">Older →</a>
+        {{ end }}
+    </nav>
+    {{ end }}
+    {{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div data-pagefind-ignore="all">
+    <a href="/posts/" class="back-link">← All posts</a>
+
+    <h1>Posts tagged "{{ .Title }}"</h1>
+
+    <section class="section">
+        <div class="post-list">
+            {{ range .Pages }}
+            {{ partial "post-card.html" . }}
+            {{ end }}
+        </div>
+    </section>
+</div>
+{{ end }}

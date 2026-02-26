@@ -1,0 +1,26 @@
+<article class="post-card">
+    <h3 class="post-card-title">
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </h3>
+    <div class="post-card-meta">
+        <time datetime="{{ .Date.Format " 2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+        <span class="separator">•</span>
+        <span>{{ .ReadingTime }} min read</span>
+        <span class="separator">•</span>
+        <span class="view-count" data-goatcounter-path="{{ .RelPermalink }}">— views</span>
+    </div>
+    {{ with .Params.tags }}
+    <div class="post-card-tags">
+        {{ range . }}
+        <a href="/tags/{{ . | urlize }}/" class="tag">{{ . }}</a>
+        {{ end }}
+    </div>
+    {{ end }}
+    {{ with .Params.description }}
+    <p class="post-card-excerpt">{{ . }}</p>
+    {{ else }}
+    {{ with .Summary }}
+    <p class="post-card-excerpt">{{ . | plainify | truncate 150 }}</p>
+    {{ end }}
+    {{ end }}
+</article>
