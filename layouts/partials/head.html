@@ -34,7 +34,7 @@
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
 {{/* CSS */}}
-{{ $css := resources.Get "css/main.css" | minify }}
+{{ $css := resources.Get "css/main.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 
 {{/* Prevent dark mode flash — blocking script sets theme before first paint */}}

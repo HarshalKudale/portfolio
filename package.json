@@ -3,7 +3,10 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "build": "npx --yes hugo-extended --minify",
-        "dev": "npx --yes hugo-extended server"
+        "build": "hugo-extended --minify",
+        "dev": "hugo-extended server"
+    },
+    "devDependencies": {
+        "hugo-extended": "0.118.2"
     }
 }

@@ -18,11 +18,11 @@
     <div id="toast" class="toast" role="alert" aria-live="polite"></div>
 
     {{/* Theme Script */}}
-    {{ $main := resources.Get "js/main.js" | minify }}
+    {{ $main := resources.Get "js/main.js" | minify | fingerprint }}
     <script src="{{ $main.RelPermalink }}"></script>
 
     {{/* GitHub Stats Script */}}
-    {{ $githubStats := resources.Get "js/github-stats.js" | minify }}
+    {{ $githubStats := resources.Get "js/github-stats.js" | minify | fingerprint }}
     <script src="{{ $githubStats.RelPermalink }}"></script>
 
     {{/* Anchor Link Copy to Clipboard */}}
