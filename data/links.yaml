@@ -5,9 +5,18 @@ professional:
   - name: "LinkedIn"
     url: "https://www.linkedin.com/in/harshalkudale/"
     icon: "linkedin"
+  - name: "Resume"
+    url: "/resume.pdf"
+    icon: "file-text"
+
+projects:
+  - name: "Bifurc"
+    url: "https://bifurc.harshalkudale.com"
+  - name: "NoMoreEdge"
+    url: "https://nomoreedge.harshalkudale.com"
 
 personal:
   - name: "Store"
     url: "https://store.harshalkudale.com"
-  - name: "Blog"
-    url: "https://blog.harshalkudale.com"
+  - name: "Articles"
+    url: "/posts/"

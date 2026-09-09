@@ -1,14 +1,19 @@
 {{ define "main" }}
-<div data-pagefind-ignore="all" style="text-align: center; padding: var(--spacing-3xl) 0;">
-    <h1 style="font-size: 4rem; margin-bottom: var(--spacing-md);">404</h1>
-    <p style="color: var(--color-text-muted); font-size: 1.25rem; margin-bottom: var(--spacing-xl);">
-        Page not found
+<div data-pagefind-ignore="all" class="not-found-container">
+    <span class="not-found-code">404</span>
+    <h1 class="not-found-title">Page not found</h1>
+    <p class="not-found-text">
+        The link you followed doesn't exist, was moved, or is under construction.
     </p>
-    <p style="font-family: var(--font-mono); color: var(--color-text-muted);">
-        The page you're looking for doesn't exist or has been moved.
-    </p>
-    <a href="/" style="display: inline-block; margin-top: var(--spacing-xl);">
-        ← Back to home
-    </a>
+    <div class="not-found-actions">
+        <a href="/" class="btn btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>Back to Home</span>
+        </a>
+        <a href="/projects/" class="btn btn-secondary">Explore Projects</a>
+    </div>
 </div>
 {{ end }}

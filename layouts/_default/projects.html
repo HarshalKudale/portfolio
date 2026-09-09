@@ -1,62 +1,126 @@
 {{ define "main" }}
-<div data-pagefind-ignore="all">
-    <h1>Projects</h1>
-    <p style="color: var(--color-text-muted); margin-bottom: var(--spacing-xl);">
-        Open source projects and side work.
-    </p>
+<div data-pagefind-ignore="all" class="projects-page-wrapper">
+    <div class="page-header">
+        <a href="/" class="back-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>Back to home</span>
+        </a>
+        <h1 class="page-title">Projects & Open Source</h1>
+        <p class="page-subtitle">
+            Developer tools, systems utilities, and production architectures built by Harshal Kudale.
+        </p>
+    </div>
 
-    {{ $projects := .Site.Data.projects }}
-    <div class="project-list">
+    {{ $projects := hugo.Data.projects }}
+    <div class="projects-container">
         {{ range $projects }}
-        <article class="project-card" data-github-owner="{{ .githubOwner }}" data-github-repo="{{ .githubRepo }}">
-            <div class="project-header">
-                <h3 class="project-name">
-                    {{ if .deployUrl }}
-                    <a href="{{ .deployUrl }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
-                    {{ else }}
-                    {{ .name }}
-                    {{ end }}
-                </h3>
-                <div class="project-stats">
-                    {{ if .githubUrl }}
-                    <span class="stat stat-stars" title="GitHub Stars">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                            <path
-                                d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" />
+        {{ if .isFlagship }}
+        <!-- Flagship Project Card: Bifurc -->
+        <div class="project-flagship-card" data-project="{{ .id }}">
+            <div class="flagship-top">
+                <div class="flagship-badge-row">
+                    <span class="flagship-badge">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                         </svg>
-                        <span class="stat-value" data-stat="stars">--</span>
+                        Flagship Project
                     </span>
-                    {{ end }}
-                    {{ if or .githubUrl .manualDownloads }}
-                    <span class="stat stat-downloads" title="Total Downloads">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                            <path
-                                d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z" />
-                            <path
-                                d="M7.25 7.689V2a.75.75 0 0 1 1.5 0v5.689l1.97-1.969a.749.749 0 1 1 1.06 1.06l-3.25 3.25a.749.749 0 0 1-1.06 0L4.22 6.78a.749.749 0 1 1 1.06-1.06l1.97 1.969Z" />
+                    <span class="open-source-badge">Open Source Desktop App</span>
+                </div>
+                <div class="project-actions-quick">
+                    {{ with .githubUrl }}
+                    <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="icon-link-btn" title="GitHub Repository">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                         </svg>
-                        <span class="stat-value" data-stat="downloads">{{ if .manualDownloads }}{{ .manualDownloads }}{{
-                            else }}--{{ end }}</span>
-                    </span>
+                        <span>GitHub</span>
+                    </a>
+                    {{ end }}
+                    {{ with .deployUrl }}
+                    <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="icon-link-btn primary" title="Visit Bifurc">
+                        <span>bifurc.harshalkudale.com</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                        </svg>
+                    </a>
                     {{ end }}
                 </div>
             </div>
-            <div class="project-tags">
-                {{ range .tags }}
-                <span class="project-tag">{{ . }}</span>
+
+            <div class="flagship-content">
+                <h3 class="flagship-title">
+                    <a href="{{ .deployUrl }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
+                </h3>
+                <p class="flagship-tagline">{{ .tagline }}</p>
+                <p class="flagship-desc">{{ .description }}</p>
+
+                {{ with .highlights }}
+                <div class="flagship-highlights-grid">
+                    {{ range . }}
+                    <div class="highlight-item">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="highlight-icon">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>{{ . }}</span>
+                    </div>
+                    {{ end }}
+                </div>
                 {{ end }}
+
+                <div class="project-tags flagship-tags">
+                    {{ range .tags }}
+                    <span class="project-tag">{{ . }}</span>
+                    {{ end }}
+                </div>
             </div>
-            <p class="project-description">{{ .description }}</p>
-            <div class="project-links">
-                {{ if .githubUrl }}
-                <a href="{{ .githubUrl }}" target="_blank" rel="noopener noreferrer">Source Code →</a>
-                {{ end }}
-                {{ if .deployUrl }}
-                <a href="{{ .deployUrl }}" target="_blank" rel="noopener noreferrer">App →</a>
-                {{ end }}
-            </div>
-        </article>
+        </div>
         {{ end }}
+        {{ end }}
+
+        <div class="projects-grid">
+            {{ range $projects }}
+            {{ if not .isFlagship }}
+            <article class="project-card" data-github-owner="{{ .githubOwner }}" data-github-repo="{{ .githubRepo }}">
+                <div class="project-card-header">
+                    <h3 class="project-name">
+                        {{ if .deployUrl }}
+                        <a href="{{ .deployUrl }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
+                        {{ else }}
+                        {{ .name }}
+                        {{ end }}
+                    </h3>
+                    <div class="project-card-actions">
+                        {{ with .githubUrl }}
+                        <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="project-card-link-icon" title="View Source">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                        </a>
+                        {{ end }}
+                        {{ with .deployUrl }}
+                        <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="project-card-link-icon" title="Open App">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                            </svg>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+
+                <p class="project-description">{{ .description }}</p>
+
+                <div class="project-tags">
+                    {{ range .tags }}
+                    <span class="project-tag">{{ . }}</span>
+                    {{ end }}
+                </div>
+            </article>
+            {{ end }}
+            {{ end }}
+        </div>
     </div>
 </div>
 {{ end }}

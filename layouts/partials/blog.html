@@ -1,22 +1,55 @@
 {{ $posts := where .Site.RegularPages "Section" "posts" }}
 
-<section class="section">
+<section id="writing" class="section section-writing">
     <div class="section-header">
-        <h2 class="section-title">Latest posts</h2>
+        <div class="section-title-group">
+            <span class="section-tag">WRITING</span>
+            <h2 class="section-title">Latest Articles</h2>
+        </div>
         {{ if gt (len $posts) 3 }}
-        <a href="/posts/" class="section-link">See all posts</a>
+        <a href="/posts/" class="section-link">
+            <span>All Articles</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </a>
         {{ end }}
     </div>
-    <div class="home-post-list">
+
+    <div class="posts-cards-list">
         {{ range first 3 $posts }}
-        <a href="{{ .RelPermalink }}" class="home-post-item">
-            <div class="home-post-info">
-                <h3 class="home-post-title">{{ .Title }}</h3>
-                <span class="home-post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+        <a href="{{ .RelPermalink }}" class="post-preview-card">
+            <div class="post-preview-main">
+                <div class="post-preview-meta">
+                    <time datetime="{{ .Date.Format "2006-01-02" }}" class="post-date">{{ .Date.Format "Jan 2, 2006" }}</time>
+                    <span class="meta-dot">·</span>
+                    <span class="post-read-time">{{ .ReadingTime }} min read</span>
+                </div>
+                <h3 class="post-preview-title">{{ .Title }}</h3>
+                {{ with .Params.description }}
+                <p class="post-preview-desc">{{ . }}</p>
+                {{ else }}
+                {{ with .Summary }}
+                <p class="post-preview-desc">{{ . | plainify | truncate 140 }}</p>
+                {{ end }}
+                {{ end }}
+
+                {{ with .Params.tags }}
+                <div class="post-preview-tags">
+                    {{ range . }}
+                    <span class="tag-pill">{{ . }}</span>
+                    {{ end }}
+                </div>
+                {{ end }}
             </div>
-            {{ with .Params.description }}
-            <p class="home-post-desc">{{ . }}</p>
-            {{ end }}
+
+            <div class="post-preview-arrow" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </div>
         </a>
         {{ end }}
     </div>

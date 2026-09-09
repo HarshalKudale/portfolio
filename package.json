@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "build": "hugo --minify",
-        "dev": "hugo server"
+        "build": "npx --yes hugo-extended --minify",
+        "dev": "npx --yes hugo-extended server"
     }
 }

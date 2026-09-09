@@ -1,5 +1,5 @@
 baseURL = 'https://harshalkudale.com/'
-languageCode = 'en-us'
+locale = 'en-us'
 title = 'Harshal Kudale'
 
 # Taxonomies
@@ -8,7 +8,7 @@ title = 'Harshal Kudale'
 
 # Parameters
 [params]
-  description = "Software Engineer III with expertise in Java, Spring Boot, and Microservices"
+  description = "Senior Software Developer specializing in Java 17, Spring Boot, Microservices, Event-Driven Architectures, and Modern Full-Stack Systems"
   author = "Harshal Kudale"
   
   # GoatCounter Analytics

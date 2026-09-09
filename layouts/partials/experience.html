@@ -1,19 +1,57 @@
-{{ $experience := .Site.Data.experience }}
+{{ $experience := hugo.Data.experience }}
 
-<section id="experience" class="section">
+<section id="experience" class="section section-experience">
     <div class="section-header">
-        <h2 class="section-title">Work Experience</h2>
-    </div>
-    {{ range first 2 $experience }}
-    <div class="home-work-item">
-        <div class="home-work-period">{{ .period }}</div>
-        <div class="home-work-details">
-            <h3 class="home-work-company">{{ .company }}</h3>
-            <p class="home-work-role">{{ .role }}</p>
-            {{ with (index .highlights 0) }}
-            <p class="home-work-desc">{{ . }}</p>
-            {{ end }}
+        <div class="section-title-group">
+            <span class="section-tag">CAREER</span>
+            <h2 class="section-title">Professional Experience</h2>
         </div>
     </div>
-    {{ end }}
+
+    <div class="experience-timeline">
+        {{ range $experience }}
+        <div class="timeline-item">
+            <div class="timeline-marker">
+                <span class="timeline-dot"></span>
+                <span class="timeline-line"></span>
+            </div>
+
+            <div class="experience-card">
+                <div class="exp-card-header">
+                    <div class="exp-title-meta">
+                        <h3 class="exp-role">{{ .role }}</h3>
+                        <div class="exp-company-row">
+                            <span class="exp-company">{{ .company }}</span>
+                            <span class="exp-location">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                {{ .location }}
+                            </span>
+                        </div>
+                    </div>
+                    <span class="exp-period-badge">{{ .period }}</span>
+                </div>
+
+                {{ with .skills }}
+                <div class="exp-skills-list">
+                    {{ range . }}
+                    <span class="exp-skill-pill">{{ . }}</span>
+                    {{ end }}
+                </div>
+                {{ end }}
+
+                <ul class="exp-highlights-list">
+                    {{ range .highlights }}
+                    <li class="exp-highlight-item">
+                        <span class="bullet-point">▸</span>
+                        <span class="highlight-text">{{ . }}</span>
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+        </div>
+        {{ end }}
+    </div>
 </section>

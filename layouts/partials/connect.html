@@ -1,20 +1,95 @@
-{{ $profile := .Site.Data.profile }}
-{{ $links := .Site.Data.links }}
+{{ $profile := hugo.Data.profile }}
+{{ $links := hugo.Data.links }}
 
-<section class="section">
+<section id="contact" class="section section-connect">
     <div class="section-header">
-        <h2 class="section-title">Let's Connect</h2>
+        <div class="section-title-group">
+            <span class="section-tag">GET IN TOUCH</span>
+            <h2 class="section-title">Let's Connect</h2>
+        </div>
     </div>
-    <p class="connect-text">If you want to get in touch with me about something or just to say hi, reach out on social media or send me an email.</p>
-    <div class="connect-links">
-        {{ range $links.professional }}
-        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name | lower }}</a>
-        <span class="separator">/</span>
-        {{ end }}
-        {{ range $links.personal }}
-        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name | lower }}</a>
-        <span class="separator">/</span>
-        {{ end }}
-        <a href="mailto:{{ $profile.email }}">{{ $profile.email }}</a>
+
+    <div class="connect-wrapper">
+        <p class="connect-intro">
+            Whether you're looking to build scalable microservices, discuss developer tools like Bifurc, explore engineering opportunities, or simply want to say hello — feel free to reach out.
+        </p>
+
+        <!-- Primary Actionable Contact Channels (2-column balanced grid) -->
+        <div class="connect-cards-grid">
+            <!-- Email Card -->
+            <div class="connect-card">
+                <div class="connect-card-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </div>
+                <div class="connect-card-details">
+                    <span class="connect-card-label">Email</span>
+                    <a href="mailto:{{ $profile.email }}" class="connect-card-value" title="{{ $profile.email }}">{{ $profile.email }}</a>
+                </div>
+                <button class="copy-action-btn" data-copy="{{ $profile.email }}" aria-label="Copy email address" title="Copy Email">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Phone Card -->
+            {{ with $profile.phone }}
+            <div class="connect-card">
+                <div class="connect-card-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                </div>
+                <div class="connect-card-details">
+                    <span class="connect-card-label">Direct Phone</span>
+                    <a href="tel:{{ replaceRE " " "" . }}" class="connect-card-value" title="{{ . }}">{{ . }}</a>
+                </div>
+                <button class="copy-action-btn" data-copy="{{ . }}" aria-label="Copy phone number" title="Copy Phone">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            {{ end }}
+        </div>
+
+        <!-- Location & Availability Status Bar -->
+        <div class="connect-meta-row">
+            <div class="meta-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="meta-icon">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Based in <strong>{{ $profile.location }}</strong> (IST · UTC+5:30)</span>
+            </div>
+            <div class="meta-item">
+                <span class="status-dot-mini"></span>
+                <span>Open for senior engineering roles & collaboration</span>
+            </div>
+        </div>
+
+        <!-- Social Profiles Strip -->
+        <div class="connect-social-strip">
+            <span class="strip-label">Profiles & Links:</span>
+            <div class="strip-links">
+                {{ range $links.professional }}
+                <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="strip-link">
+                    <span>{{ .name }}</span>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+                </a>
+                {{ end }}
+                {{ range $links.personal }}
+                <a href="{{ .url }}" {{ if hasPrefix .url "http" }}target="_blank" rel="noopener noreferrer"{{ end }} class="strip-link">
+                    <span>{{ .name }}</span>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+                </a>
+                {{ end }}
+            </div>
+        </div>
     </div>
 </section>

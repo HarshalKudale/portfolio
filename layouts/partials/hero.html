@@ -1,9 +1,85 @@
-{{ $profile := .Site.Data.profile }}
-{{ $links := .Site.Data.links }}
+{{ $profile := hugo.Data.profile }}
+{{ $links := hugo.Data.links }}
 
-<section class="hero">
-    <p class="hero-greeting">Hi there, I'm</p>
-    <h1 class="hero-title">{{ $profile.name }} 👋🏻</h1>
-    <p class="hero-subtitle">{{ $profile.title }} · {{ $profile.location }}</p>
-    <p class="hero-bio">{{ $profile.bio }}</p>
+<section class="hero section-hero" id="hero">
+    <div class="hero-main-row">
+        <div class="hero-text-content">
+            <h1 class="hero-title">
+                Harshal Kudale
+            </h1>
+            <p class="hero-tagline">
+                <span class="role-highlight">Senior Software Developer · Full Stack</span>
+                <span class="hero-location">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    Pune, IN
+                </span>
+            </p>
+            <p class="hero-bio">
+                {{ $profile.bio }}
+            </p>
+
+            <!-- Quick Metrics / Credential Chips -->
+            <div class="hero-metrics">
+                <div class="metric-chip">
+                    <span class="metric-number">4+</span>
+                    <span class="metric-label">Years of Experience</span>
+                </div>
+                <div class="metric-chip">
+                    <span class="metric-number">Java</span>
+                    <span class="metric-label">Spring Boot Microservices</span>
+                </div>
+                <div class="metric-chip">
+                    <span class="metric-number">Javascript</span>
+                    <span class="metric-label">React + knockout</span>
+                </div>
+                <div class="metric-chip">
+                    <span class="metric-number">9.33</span>
+                    <span class="metric-label">CGPA / 10.0 (B.E. CS)</span>
+                </div>
+            </div>
+
+            <!-- Action CTAs -->
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-primary">
+                    <span>View Projects</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <polyline points="19 12 12 19 5 12"></polyline>
+                    </svg>
+                </a>
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    <span>Resume (PDF)</span>
+                </a>
+                <a href="#contact" class="btn btn-ghost">
+                    <span>Contact Me</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-avatar-col">
+            <div class="avatar-wrapper">
+                <img src="/profile.jpg" alt="Harshal Kudale" class="hero-avatar" width="160" height="160"
+                    loading="eager" />
+                <div class="avatar-glow"></div>
+            </div>
+        </div>
+    </div>
 </section>

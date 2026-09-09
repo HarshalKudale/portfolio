@@ -1,12 +1,89 @@
-<header class="header">
-    <div class="container">
-        <a href="/" class="logo">~/{{ .Site.Params.author | lower | replaceRE " " "_" }}</a>
+<header class="header" id="site-header">
+    <div class="container header-container">
+        <a href="/" class="logo" aria-label="Harshal Kudale Home">
+            <span class="logo-prompt">~</span>
+            <span class="logo-slash">/</span>
+            <span class="logo-name">{{ .Site.Params.author | lower | replaceRE " " "_" }}</span>
+            <span class="logo-cursor">_</span>
+        </a>
 
-        <nav class="nav">
+        <!-- Desktop Navigation -->
+        <nav class="nav nav-desktop" aria-label="Primary Navigation">
+            <a href="/#projects" class="nav-link">projects</a>
+            <a href="/#skills" class="nav-link">skills</a>
             <a href="/#experience" class="nav-link">experience</a>
-            <a href="/projects/" class="nav-link">projects</a>
             <a href="/posts/" class="nav-link">posts</a>
-            <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+            <a href="/#contact" class="nav-link">contact</a>
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-resume-btn">
+                <span>Resume</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                </svg>
+            </a>
+            <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+                <span class="theme-icon theme-icon-dark">🌙</span>
+                <span class="theme-icon theme-icon-light" style="display:none;">☀️</span>
+            </button>
         </nav>
+
+        <!-- Mobile Header Actions -->
+        <div class="header-mobile-actions">
+            <button class="theme-toggle mobile-theme-toggle" aria-label="Toggle theme">
+                <span class="theme-icon theme-icon-dark">🌙</span>
+                <span class="theme-icon theme-icon-light" style="display:none;">☀️</span>
+            </button>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Drawer Overlay -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay" aria-hidden="true">
+        <div class="mobile-nav-drawer">
+            <div class="mobile-nav-header">
+                <span class="mobile-nav-title">Menu</span>
+                <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">&times;</button>
+            </div>
+            <nav class="mobile-nav-links">
+                <a href="/#projects" class="mobile-nav-link">
+                    <span class="link-bullet">01</span>
+                    <span>Projects</span>
+                </a>
+                <a href="/#skills" class="mobile-nav-link">
+                    <span class="link-bullet">02</span>
+                    <span>Skills</span>
+                </a>
+                <a href="/#experience" class="mobile-nav-link">
+                    <span class="link-bullet">03</span>
+                    <span>Experience</span>
+                </a>
+                <a href="/posts/" class="mobile-nav-link">
+                    <span class="link-bullet">04</span>
+                    <span>Posts & Articles</span>
+                </a>
+                <a href="/#contact" class="mobile-nav-link">
+                    <span class="link-bullet">05</span>
+                    <span>Contact</span>
+                </a>
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="mobile-nav-link mobile-nav-resume">
+                    <span class="link-bullet">06</span>
+                    <span>Download Resume (PDF)</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                    </svg>
+                </a>
+            </nav>
+            <div class="mobile-nav-footer">
+                <p class="mobile-nav-credit">Harshal Kudale · Senior Software Developer</p>
+                <div class="mobile-nav-socials">
+                    <a href="https://github.com/HarshalKudale" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://linkedin.com/in/HarshalKudale" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="mailto:contact@harshalkudale.com">Email</a>
+                </div>
+            </div>
+        </div>
     </div>
 </header>

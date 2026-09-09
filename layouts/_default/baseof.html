@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode | default " en" }}">
+<html lang="{{ .Site.Language.Locale | default "en" }}">
 
 <head>
     {{- partial "head.html" . -}}
@@ -13,6 +13,9 @@
     </main>
 
     {{- partial "footer.html" . -}}
+
+    <!-- Toast Notification Container -->
+    <div id="toast" class="toast" role="alert" aria-live="polite"></div>
 
     {{/* Theme Script */}}
     {{ $main := resources.Get "js/main.js" | minify }}

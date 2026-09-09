@@ -1,32 +1,126 @@
-{{ $projects := .Site.Data.projects }}
-{{ $featured := where $projects "featured" true }}
-{{ if not $featured }}
-{{ $featured = first 2 $projects }}
-{{ end }}
+{{ $projects := hugo.Data.projects }}
 
-<section id="projects" class="section">
+<section id="projects" class="section section-projects">
     <div class="section-header">
-        <h2 class="section-title">Recent projects</h2>
-        {{ if gt (len $projects) (len $featured) }}
-        <a href="/projects/" class="section-link">See all projects</a>
-        {{ end }}
+        <div class="section-title-group">
+            <span class="section-tag">PORTFOLIO</span>
+            <h2 class="section-title">Featured Projects</h2>
+        </div>
+        <a href="/projects/" class="section-link">
+            <span>All Projects</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </a>
     </div>
-    <div class="home-post-list">
-        {{ range $featured }}
-        <div class="home-post-item">
-            <div class="home-post-info">
-                <h3 class="home-post-title">{{ .name }}</h3>
-                <div class="home-project-links">
+
+    <div class="projects-container">
+        {{ range $projects }}
+        {{ if .isFlagship }}
+        <!-- Flagship Project Card: Bifurc -->
+        <div class="project-flagship-card" data-project="{{ .id }}">
+            <div class="flagship-top">
+                <div class="flagship-badge-row">
+                    <span class="flagship-badge">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        Flagship Project
+                    </span>
+                    <span class="open-source-badge">Open Source Desktop App</span>
+                </div>
+                <div class="project-actions-quick">
                     {{ with .githubUrl }}
-                    <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="home-project-link">Source Code →</a>
+                    <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="icon-link-btn" title="GitHub Repository">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                        <span>GitHub</span>
+                    </a>
                     {{ end }}
                     {{ with .deployUrl }}
-                    <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="home-project-link">Live →</a>
+                    <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="icon-link-btn primary" title="Visit Bifurc">
+                        <span>bifurc.harshalkudale.com</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                        </svg>
+                    </a>
                     {{ end }}
                 </div>
             </div>
-            <p class="home-post-desc">{{ .description }}</p>
+
+            <div class="flagship-content">
+                <h3 class="flagship-title">
+                    <a href="{{ .deployUrl }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
+                </h3>
+                <p class="flagship-tagline">{{ .tagline }}</p>
+                <p class="flagship-desc">{{ .description }}</p>
+
+                {{ with .highlights }}
+                <div class="flagship-highlights-grid">
+                    {{ range . }}
+                    <div class="highlight-item">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="highlight-icon">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>{{ . }}</span>
+                    </div>
+                    {{ end }}
+                </div>
+                {{ end }}
+
+                <div class="project-tags flagship-tags">
+                    {{ range .tags }}
+                    <span class="project-tag">{{ . }}</span>
+                    {{ end }}
+                </div>
+            </div>
         </div>
         {{ end }}
+        {{ end }}
+
+        <!-- Other Projects Grid -->
+        <div class="projects-grid">
+            {{ range $projects }}
+            {{ if not .isFlagship }}
+            <article class="project-card" data-github-owner="{{ .githubOwner }}" data-github-repo="{{ .githubRepo }}">
+                <div class="project-card-header">
+                    <h3 class="project-name">
+                        {{ if .deployUrl }}
+                        <a href="{{ .deployUrl }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
+                        {{ else }}
+                        {{ .name }}
+                        {{ end }}
+                    </h3>
+                    <div class="project-card-actions">
+                        {{ with .githubUrl }}
+                        <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="project-card-link-icon" title="View Source">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                        </a>
+                        {{ end }}
+                        {{ with .deployUrl }}
+                        <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="project-card-link-icon" title="Open App">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                            </svg>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+
+                <p class="project-description">{{ .description }}</p>
+
+                <div class="project-tags">
+                    {{ range .tags }}
+                    <span class="project-tag">{{ . }}</span>
+                    {{ end }}
+                </div>
+            </article>
+            {{ end }}
+            {{ end }}
+        </div>
     </div>
 </section>

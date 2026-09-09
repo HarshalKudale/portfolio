@@ -1,0 +1,49 @@
+{{ $education := hugo.Data.education }}
+
+<section id="education" class="section section-education">
+    <div class="section-header">
+        <div class="section-title-group">
+            <span class="section-tag">ACADEMICS</span>
+            <h2 class="section-title">Education</h2>
+        </div>
+    </div>
+
+    <div class="education-grid">
+        {{ range $education }}
+        <div class="education-card">
+            <div class="edu-card-header">
+                <div class="edu-title-group">
+                    <h3 class="edu-degree">{{ .degree }}</h3>
+                    <div class="edu-inst-row">
+                        <span class="edu-institution">{{ .institution }}</span>
+                        <span class="edu-location">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            {{ .location }}
+                        </span>
+                    </div>
+                </div>
+                <div class="edu-badge-col">
+                    <span class="edu-period">{{ .period }}</span>
+                    {{ with .gpa }}
+                    <span class="edu-gpa-badge">CGPA: {{ . }}</span>
+                    {{ end }}
+                </div>
+            </div>
+
+            {{ with .highlights }}
+            <ul class="edu-highlights-list">
+                {{ range . }}
+                <li class="edu-highlight-item">
+                    <span class="bullet-point">▸</span>
+                    <span>{{ . }}</span>
+                </li>
+                {{ end }}
+            </ul>
+            {{ end }}
+        </div>
+        {{ end }}
+    </div>
+</section>
