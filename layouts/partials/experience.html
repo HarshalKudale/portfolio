@@ -1,4 +1,4 @@
-{{ $experience := hugo.Data.experience }}
+{{ $experience := site.Data.experience }}
 
 <section id="experience" class="section section-experience">
     <div class="section-header">
@@ -23,7 +23,8 @@
                         <div class="exp-company-row">
                             <span class="exp-company">{{ .company }}</span>
                             <span class="exp-location">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
                                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                                     <circle cx="12" cy="10" r="3"></circle>
                                 </svg>
