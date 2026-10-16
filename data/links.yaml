@@ -6,14 +6,14 @@ professional:
     url: "https://www.linkedin.com/in/harshalkudale/"
     icon: "linkedin"
   - name: "Resume"
-    url: "/resume.pdf"
+    url: "/HarshalKudale.pdf"
     icon: "file-text"
 
 projects:
   - name: "Bifurc"
-    url: "https://bifurc.harshalkudale.com"
+    url: "https://bifurc.app"
   - name: "NoMoreEdge"
-    url: "https://nomoreedge.harshalkudale.com"
+    url: "https://github.com/HarshalKudale/NoMoreEdge"
 
 personal:
   - name: "Store"

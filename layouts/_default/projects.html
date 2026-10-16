@@ -32,7 +32,7 @@
                         </svg>
                         Flagship Project
                     </span>
-                    <span class="open-source-badge">Open Source Desktop App</span>
+                    <span class="open-source-badge">Desktop App</span>
                 </div>
                 <div class="project-actions-quick">
                     {{ with .githubUrl }}
@@ -48,7 +48,7 @@
                     {{ with .deployUrl }}
                     <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="icon-link-btn primary"
                         title="Visit Bifurc">
-                        <span>bifurc.harshalkudale.com</span>
+                        <span>{{ replaceRE "^https?://" "" . }}</span>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.5">
                             <path d="M7 17l9.2-9.2M17 17V7H7" />

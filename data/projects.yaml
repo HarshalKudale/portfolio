@@ -8,16 +8,12 @@
     - "React"
     - "Networking"
     - "DevTools"
-    - "Open Source"
   highlights:
     - "*.localhost domain mapping (RFC 6767) without touching hosts files"
     - "Trusted local CA generation & zero-config TLS interception"
     - "Live traffic capture, replay, and advanced scriptable mocking"
     - "Git-based workspace versioning for team API workflows"
-  githubUrl: "https://github.com/HarshalKudale/bifurc"
-  deployUrl: "https://bifurc.harshalkudale.com"
-  githubOwner: "HarshalKudale"
-  githubRepo: "bifurc"
+  deployUrl: "https://bifurc.app"
   featured: true
   isFlagship: true
 
@@ -31,7 +27,6 @@
     - "Open Source"
     - "Systems"
   githubUrl: "https://github.com/HarshalKudale/NoMoreEdge"
-  deployUrl: "https://nomoreedge.harshalkudale.com"
   githubOwner: "HarshalKudale"
   githubRepo: "NoMoreEdge"
   featured: true
